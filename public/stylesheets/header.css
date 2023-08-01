@@ -1,0 +1,107 @@
+.header {
+    display: flex;
+    flex-direction: column;
+}
+
+.header__header-sm {
+    display: flex;
+    background-color: #205492;
+    /* padding: 15px 0px 15px 30px; */
+    padding: 10px 10% 10px;
+}
+
+.header__sm-logo {
+    /* margin-right: -10px; */
+    float: left;
+    margin-right: auto;
+}
+
+/* .header__sm-title {
+    display: flex;
+    color: white;
+    align-items: center;
+    font-weight: 600;
+    font-size: 24px;
+} */
+
+.header .user_info{
+    float: left;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.header .user_info_name{
+    flex: 1;
+    margin-right: 2em;
+    font-size: 15px;
+}
+
+.header .logout_button{
+    flex: 1;
+}
+.header .btn-link{
+    color: white;
+    font-size: 15px;
+}
+
+.header__header-platform {
+    display: flex;
+    padding: 30px 10% 30px;
+    align-items: center;
+}
+
+.header__platform-title {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 25px;
+    margin-right: 60px;
+}
+
+.header__platform-menu {
+    width: 50%;
+    align-items: center;
+    font-size: 18px;
+}
+
+.platform__menu-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__platform-menu-dropdown {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .header__platform-menu {
+        display: none;
+    }
+
+    .header__platform-menu-dropdown {
+        display: block;
+        margin-left: auto;
+    }
+    .header__platform-menu-dropdown .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 150px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        right: 0;
+    }
+
+    .header__platform-menu-dropdown .dropdown-content a {
+        color: #212121;
+        display: block;
+        padding: 10px 15px;
+    }
+
+    .header__platform-menu-dropdown .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+    .header__platform-menu-dropdown:hover .dropdown-content {display: block;}
+}

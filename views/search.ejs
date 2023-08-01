@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+    <link rel="shortcut icon" href="/images/shortcut3.svg" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- MDBootstrap Datatables  -->
+    <link href="/mdb/css/addons/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <%- include('search-main.ejs') %>
+    <%- include('footer.ejs') %>
+    <script type="text/javascript" src="/mdb/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/mdb/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/mdb.min.js"></script>
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="/mdb/js/addons/datatables.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script src="/modal/js/jquery.loadingModal.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var visitnm = $('#select_box option:selected').val();
+            makeClinicalTBody(visitnm);
+
+            $('body').loadingModal('hide');
+            $('#dtBasicExample').DataTable();
+            $('.dataTables_length').addClass('bs-select');
+        });
+
+        $(window).on('beforeunload', function() {
+            $('body').loadingModal({
+                    position: 'auto',
+                    text: 'Loading...',
+                    color: '#fff',
+                    opacity: '0.7',
+                    backgroundColor: 'rgb(0,0,0)',
+                    animation: 'doubleBounce'
+                });
+        });
+        $(document).on("change", "#select_box", function(){
+            var visitnm = $(this).val();
+            makeClinicalTBody(visitnm);
+        });
+
+        function makeClinicalTBody(visitnm){
+            $.ajax({
+                url : "/search/query=<%=keyword%>/ajax",
+                type : "POST",
+                dataType : "JSON",
+                data : {"visitnm" : visitnm},
+                success: function(data){
+                    $("#clinical-table-tbody tr").remove();
+                    $("#clinical-table-tbody").append(
+                        '<tr><td class="table-clinical-item">연구대상자ID</td><td>'+data.SUBJNO+'</td><td class="table-clinical-item">성별</td><td>'+data.SEX_SYS_VAL+'</td></tr>\
+                        <tr><td class="table-clinical-item">나이</td><td>'+data.AGE_SYS_VAL+'</td><td class="table-clinical-item">폐기능검사 시행일</td><td>'+data.SPR2+'</td></tr>\
+                        <tr><td class="table-clinical-item">기관지 확장제 반응</td><td>'+data.SPR1+'</td><td class="table-clinical-item">기관지 확장제 반응 결과</td><td>'+data.SPR3+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDF1P-AFBDF1P\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEV1 예측치</td><td>'+data.BFBDF1P+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEV1 예측치</td><td>'+data.AFBDF1P+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDF1R-AFBDF1R\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEV1 측정치</td><td>'+data.BFBDF1R+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEV1 측정치</td><td>'+data.AFBDF1R+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDF1PP-AFBDF1PP\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEV1 %예측치</td><td>'+data.BFBDF1PP+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEV1 %예측치</td><td>'+data.AFBDF1PP+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDFVP-AFBDFVP\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FVC 예측치</td><td>'+data.BFBDFVP+'</td><td class="table-clinical-item">기관지확장제 투여 후 FVC 예측치</td><td>'+data.AFBDFVP+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDFVR-AFBDFVR\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FVC 측정치</td><td>'+data.BFBDFVR+'</td><td class="table-clinical-item">기관지확장제 투여 후 FVC 측정치</td><td>'+data.AFBDFVR+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDFVPP-AFBDFVPP\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FVC %예측치</td><td>'+data.BFBDFVPP+'</td><td class="table-clinical-item">기관지확장제 투여 후 FVC %예측치</td><td>'+data.AFBDFVPP+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDFFP-AFBDFFP\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEV1/FVC 예측치</td><td>'+data.BFBDFFP+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEV1/FVC 예측치</td><td>'+data.AFBDFFP+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDFFR-AFBDFFR\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEV1/FVC 측정치</td><td>'+data.BFBDFFR+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEV1/FVC 측정치</td><td>'+data.AFBDFFR+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDFFPP-AFBDFFPP\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEV1/FVC %예측치</td><td>'+data.BFBDFFPP+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEV1/FVC %예측치</td><td>'+data.AFBDFFPP+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDF25P-AFBDF25P\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEF25-75 예측치</td><td>'+data.BFBDF25P+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEF25-75 예측치</td><td>'+data.AFBDF25P+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDF25R-AFBDF25R\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEF25-75 측정치</td><td>'+data.BFBDF25R+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEF25-75 측정치</td><td>'+data.AFBDF25R+'</td></tr>\
+                        <tr onclick="location.href=\'/search/chart/?id='+data.SUBJNO+'&value=BFBDF25PP-AFBDF25PP\'" style="cursor:pointer;"><td class="table-clinical-item">기관지확장제 투여 전 FEF25-75 %예측치</td><td>'+data.BFBDF25PP+'</td><td class="table-clinical-item">기관지확장제 투여 후 FEF25-75 %예측치</td><td>'+data.AFBDF25PP+'</td></tr>\
+                        <tr><td class="table-clinical-item">FEV1 절대값(L)</td><td>'+data.AFBDRF1A+'</td><td class="table-clinical-item">FVC 절대값(L)</td><td>'+data.AFBDRFVA+'</td></tr>\
+                        <tr><td class="table-clinical-item">FEV1 %변화치</td><td>'+data.AFBDRF1C+'</td><td class="table-clinical-item">FVC %변화치</td><td>'+data.AFBDRFVC+'</td></tr>\
+                        <tr><td class="table-clinical-item">호기산화질소(FeNO) 시행일</td><td>'+data.FENO1+'</td><td class="table-clinical-item">유도객담검사 시행일</td><td>'+data.SPUD+'</td></tr>\
+                        <tr><td class="table-clinical-item">호기산화질소(FeNO) 결과</td><td>'+data.FENO2+'</td><td class="table-clinical-item">WBC count</td><td>'+data.SPUW+'</td></tr>\
+                        <tr><td class="table-clinical-item">알레르겐 피부시험 혹은 specific IgE 검사 결과 시행일</td><td>'+data.DERD+'</td><td class="table-clinical-item">Eosinophils</td><td>'+data.SPUE+'</td></tr>\
+                        <tr><td class="table-clinical-item">아토피 여부</td><td>'+data.DERYN+'</td><td class="table-clinical-item">혈액검사 시행일</td><td>'+data.CBCD+'</td></tr>\
+                        <tr><td class="table-clinical-item">Eosinophils</td><td>'+data.CBCEC+'</td><td></td><td></td></tr>\
+                    ');
+                }
+            });
+
+        }
+    </script>
+</body>
+</html>

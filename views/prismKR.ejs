@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+    <link rel="shortcut icon" href="/images/shortcut3.svg" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- MDBootstrap Datatables  -->
+    <link href="/mdb/css/addons/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <div class="stripe-space"></div>
+    <main class="prismKR">
+        <h1 class="table-title">PRISM (KR) Dataset</h1>
+        <h1 class="table-title-information">The table below shows the PRISM dataset from Korea for the selected omics type.</h1>
+
+        <div class="dropdown">
+            <select name="select_box" id="select_box" class="form-control">
+                <option value='' selected>-- select --</option>
+                <option value="Genomics(Whole Blood)">Genomics (Whole Blood)</option>
+                <option value="Transcriptomics(Single cell RNA (PBMC))">Transcriptomics (Single cell RNA (PBMC))</option>
+                <option value="Transcriptomics(Total RNA (PBMC))">Transcriptomics (Total RNA (PBMC))</option>
+                <option value="Transcriptomics(Single cell RNA (BALF))">Transcriptomics (Single cell RNA (BALF))</option>
+                <option value="Transcriptomics(Total RNA (BALF, bronchial biopsy))">Transcriptomics (Total RNA (BALF, bronchial biopsy))</option>
+                <option value="Proteomics(Sputum)">Proteomics (Sputum)</option>
+                <option value="Proteomics(Plasma)">Proteomics (Plasma)</option>
+                <option value="Metabolomics(Plasma)">Metabolomics (Plasma)</option>
+                <option value="Metabolomics(Urine)">Metabolomics (Urine)</option>
+                <option value="Metagenomics(Serum)">Metagenomics (Serum)</option>
+                <option value="Metagenomics(Urine)">Metagenomics (Urine)</option>
+                <option value="Metagenomics(EBC)">Metagenomics (EBC)</option>
+            </select>
+        </div> 
+
+        <div class="table-div">
+            <table class=" table table-hover">
+                <thead>
+                    <tr>
+                        <th class="table-fileName">file name</th>   
+                        <th class="table-downloadButton">Download</th>
+                    </tr>
+                </thead>
+                <tbody id="prismKR-table-zip-tbody">
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+    <%- include('footer.ejs') %>
+    <script type="text/javascript" src="/mdb/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/mdb/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/mdb.min.js"></script>
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="/mdb/js/addons/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).on("change", "#select_box", function(){
+            var omicsName = $(this).val();
+            $.ajax({
+                url : "/menu/prismKR/ajax",
+                type : "POST",
+                dataType : "JSON",
+                data : {"omicsName" : omicsName},
+                success: function(data){
+                    $("#prismKR-table-zip-tbody tr").remove();
+                    for (var value of data) {
+                        $("#prismKR-table-zip-tbody").append(
+                            '<tr><td>'+value+'</td><td>\
+                                <button type="button" id="zipDownloadbutton" class="zipDownloadbutton"><img src="/images/download.png" alt="btnImages" width=20></button>\
+                            </td></tr>');
+                    }
+                }
+            });
+        });
+
+        $(document).on("click","#zipDownloadbutton",function(){      
+            var button = $(this);
+            var omicsName = $("#select_box").val();
+            var tr = button.parent().parent();
+            var td = tr.children();
+            var value = td.eq(0).text();
+    
+            location.href="/menu/prismKR/omicsName="+omicsName+"/file=" + value;
+        });
+    </script>
+    
+</body>
+</html>

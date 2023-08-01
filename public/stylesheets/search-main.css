@@ -1,0 +1,277 @@
+.search__main {
+    display: flex;
+    flex-direction: column;
+    /* padding: 0px 30px; */
+}
+
+.search__main .search__wrapper {
+    background-color: #F5F5F5;
+    /* padding: 30px 30px; */
+    padding: 30px 5%;
+}
+
+.search__main .search-bar {
+    width: 100%;
+    background-color: white;
+    margin: 15px 0px 15px 0px;
+    border-radius: 5px;
+}
+
+.search__main .search-form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.search__main .search-input {
+    width: 96%;
+    font-size: 28px;
+    padding: 7px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search__main .search-input:focus {
+    outline: none;
+}
+
+.search__main .search-bar i {
+    color: #205492;
+}
+
+.search__main .search__tab {
+    /* padding-bottom: 30px; */
+    /* width: 100%; */
+    padding: 10px 5%;
+}
+.search__main .tab-list {
+    display: flex;
+    justify-content: space-around;
+    background-color: #F5F5F5;
+}
+
+.search__main .tab-list .tab {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.search__main .tab-list .selected {
+    background-color: #205492;
+    color: white;
+}
+
+.search__main .tab-list .tab:hover{
+    background-color: #EFF8FE;
+    border-bottom: 2px solid #205492;
+    color: #020202;
+}
+
+.search__main .search__result .multiple-table {
+    border-bottom: 1px dotted #abb2bf;
+    padding: 20px 5%;
+}
+
+.search__main .search__result {
+    padding: 30px 5%;
+}
+
+.search__main .table-title {
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.search__main .table-title-information{
+    font-size: 20px;
+    padding-bottom: 18px;
+}
+
+.search__main .table-information {
+    padding-bottom: 50px;
+}
+
+.search__main .table-thead{
+    background-color:#F5F5F5;
+    font-weight: bolder;
+    width: 33.3%;
+}
+
+.search__main .table-clinical-thead-item{
+    background-color:#F5F5F5;
+    font-weight: bolder;
+    width: 30%;
+}
+
+.search__main .table-clinical-thead-value{
+    background-color:#F5F5F5;
+    font-weight: bolder;
+    width: 20%;
+}
+
+.search__main .table-clinical-item{
+    font-weight: 600;
+}
+
+.search__main .form-control{
+    width: 20%;
+}
+.search__main .tab2-flex-container {
+    display:flex;
+    flex-direction:row;
+    width: 100%;
+    height:100%;
+    flex-wrap: wrap;
+    padding-top: 50px;
+}
+
+.search__main .locked-section-box
+{
+    flex-grow: 1;
+    text-align:center;
+    margin: 1rem!important;
+    min-width: 300px;
+    max-width: calc(50% - 2rem);
+    box-shadow: 0 0 6px 0 rgba(45,49,57,.5);
+    width: 300px;
+    border-left: 1px dashed #192027;
+    border-right: 1px dashed #192027;
+    border-bottom: 1px dashed #192027;
+}
+
+
+.search__main .locked-section-box .locked-header {
+    background-color: #205493;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: bolder;
+    line-height: 1.7rem;
+    padding: .3rem .3rem .2rem;
+    text-align: center;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.search__main .locked-section-box .locked-content .locked-info{
+    height: 100%;
+}
+
+.search__main .locked-section-box .locked-content .locked-info {
+    background-color: #fff;
+    text-align: center;
+    font-size: .95rem;
+    padding: 1rem 1.5rem;
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.search__main .locked-info .locked-panel-header {
+    font-weight: bolder;
+    font-size: 1rem;
+    margin-bottom: .5rem;
+}
+
+.search__main .locked-info p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-weight: lighter;
+    line-height: 20px;
+}
+
+.search__main .locked-button {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,color .15s ease-in-out;
+                transition-property: background-color, border-color, box-shadow, color;
+                transition-duration: 0.15s, 0.15s, 0.15s, 0.15s;
+                transition-timing-function: ease-in-out, ease-in-out, ease-in-out, ease-in-out;
+                transition-delay: 0s, 0s, 0s, 0s;
+    font-size: .775rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+    padding: .25rem .5rem .2rem;
+}
+
+.search__main .locked-button-blue {
+    color: #205493;
+    border-color: #205493;
+    border-radius: 999px;
+}
+
+.search__main .locked-button-blue:visited {
+    color: #205493;
+}
+
+.search__main .locked-button:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.search__main .locked-section-box .locked-content .locked-info .locked-button {
+    font-size: .775rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+    padding: .25rem .5rem .2rem;
+}
+
+.search__main .geneontology-flex-container .mc
+    {flex-direction:column;flex-wrap:wrap;width:100%;height:100%;}
+
+
+.search__main .search-bar-sticky {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: white;
+    padding: 10px 5%;
+    box-shadow: 0 0 6px 0 rgba(45,49,57,.5);
+}
+.search__main .search-bar-sticky form {
+    display: flex;
+    width: 100%;
+}
+
+.search__main .search-bar-sticky span {
+    font-size: 20px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.search__main .search-bar-sticky form .search-input-sticky {
+    border: none;
+    font-size: 18px;
+    width: 95%;
+}
+
+.search__main .search-bar-sticky form .search-input-sticky:focus {
+    outline: none;
+}
+
+.search__main .search-bar-sticky form i {
+    color: #205492;
+    font-size: 18px;
+}
+
+.table-title-chart{
+    font-size: 25px;
+    font-weight: 600;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+}

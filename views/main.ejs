@@ -1,0 +1,223 @@
+<main class="index__main">
+    <div class="search__wrapper">
+        <div class="search__container">
+            <div class="search-heading">
+                <!-- <span class="heading">Explore Asthma Patient<br><center>Multi-omics Data</center></span> -->
+                <span class="heading"><center>Precision Medicine in Severe Asthma: Korea-UK PRISM study consortium</center></span>
+                
+            </div>
+            <div class="search-subheading">
+                <span class="subheading">Quickly find sample information from data sources!</span>
+            </div>
+            <div class="search-bar">
+                <form action="/search" method="get" id="search-form" class="search-form">
+                    <input type="text" class="search-input" name="query" placeholder="search" />
+                    <i class="fas fa-search fa-2x"></i>
+                </form>
+            </div>
+            <div class="search-example">
+                <ul class="example-list">
+                    <li class="example">Examples:</li>
+                    <li class="example"><a href="/search?query=01-001">01-001</a></li>
+                    <li class="example"><a href="/search?query=01-002">01-002</a></li>
+                    <li class="example"><a href="/search?query=01-003">01-003</a></li>
+                    <li class="example"><a href="/search?query=01-004">01-004</a></li>
+                    <li class="example"><a href="/search?query=01-005">01-005</a></li>
+                    <li class="example"><a href="/search?query=01-006">01-006</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="dataset-chart-space">
+            <div class="dataset-chart-title">
+                <div class="line-chart-title">COREA</div>
+                <div class="line-chart-title">PRISM KR</div>
+            </div>
+            <div class="dataset-chart">
+                <div class="line-chart" id="chartdiv1"></div>
+                <div class="line-chart" id="chartdiv2"> </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="platform-description">
+        <div class="description__wrapper">
+            <span class="description-heading"><center>Precision Medicine in Severe Asthma: <br>Korea-UK PRISM study consortium</center></span>
+            <p class="description-content">This platform focuses on integration and analysis of asthma multi-omics dataset for precision medicine. It is a web-based platform for storage and share of large volume of data to implement multi-omics analysis pipeline and workflow. Currently, it provides sample information for each omics data and supports users to search their multi-omics sample dataset and data visualization. Based on this platform, obtained dataset can be utilized to improve the efficiency of the research and enable the validation of experiments. This can also provide the fundamental for research reliability by increasing the accuracy.</p>
+            <div class="logo">
+                <!-- <img src="http://203.252.206.90:5566/images/prismcoreaLogo.png" alt="Breaking Borders Logo" height="80">   -->
+                <img src="http://203.252.206.90:5566/images/prismcoreaubiopredLogo.png" alt="Breaking Borders Logo" height="80">  
+            </div>
+        </div>
+    </div>
+    <div class="search-bar-sticky">
+        <span>platform</span>
+        <form action="/search" method="get" id="search-form">
+            <input type="text" class="search-input-sticky" name="query" placeholder="search" />
+            <i class="fas fa-search fa-2x"></i>
+        </form>
+    </div>
+</main>
+
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+<!-- <script src="//www.amcharts.com/lib/4/core.js"></script>
+<script src="//www.amcharts.com/lib/4/charts.js"></script>
+<script src="//www.amcharts.com/lib/4/themes/animated.js"></script> -->
+<script>
+      
+    document.querySelector(".search-bar-sticky").style.display = "none";
+    function submitForm(){
+        document.getElementById("search-form").submit();
+    }
+    let input = document.querySelector(".search-input");
+    input.addEventListener("keyup", function(event) {
+        if(event.keyCode === 13) {
+            event.preventDefault();
+            submitForm();
+        }
+    });
+    let submitBtn = document.querySelector(".search-form i");
+    submitBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        submitForm();
+    });
+
+    var sticky = input.offsetTop;
+    window.onscroll = function() {
+        if(window.pageYOffset >= sticky) {
+            document.querySelector(".search-bar-sticky").style.display = "flex";
+        } else {
+            document.querySelector(".search-bar-sticky").style.display = "none";
+        }
+    }
+
+    //amchart
+    function createChart(div, data, num) {
+        var root = am5.Root.new(div);
+    
+        // Set themes
+        root.setThemes([
+            am5themes_Animated.new(root)
+        ]);
+
+        // Create chart
+        var chart = root.container.children.push(am5xy.XYChart.new(root, {
+            panX: true,
+            panY: true,
+            // wheelX: "panX",
+            // wheelY: "zoomX",
+            // pinchZoomX:true,fon
+        }));
+
+        // Add cursor
+        var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
+        cursor.lineY.set("visible", false);
+
+        // Create axes
+        var yRenderer = am5xy.AxisRendererY.new(root, { minGridDistance: 30 });
+            yRenderer.labels.template.setAll({
+            rotation: 0,
+            centerY: am5.p50,
+            centerX: am5.p50,
+            paddingRight: 10,
+        });
+
+        var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
+            maxDeviation: 0.3,
+            categoryField: "name",
+            renderer: yRenderer,
+            tooltip: am5.Tooltip.new(root, {}),
+        }));
+
+        var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
+            maxDeviation: 0.3,
+            renderer: am5xy.AxisRendererX.new(root, {})
+        }));
+        var myTheme = am5.Theme.new(root);
+
+        myTheme.rule("AxisLabel").setAll({
+        fill: am5.color(0xFFFFFF),
+        });
+        myTheme.rule("Grid").setAll({
+            stroke: am5.color(0xFFFFFF),
+            strokeWidth: 2
+        });
+        root.setThemes([
+            myTheme
+        ]);
+
+        // Create series
+        var series_name = "Series "+String(num)
+        var series = chart.series.push(am5xy.ColumnSeries.new(root, {
+            name: series_name,
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueXField: "num",
+            sequencedInterpolation: true,
+            categoryYField: "name",
+            tooltip: am5.Tooltip.new(root, {
+                labelText:"{valueX}"
+            })
+        }));
+
+
+
+        series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+        series.columns.template.adapters.add("fill", function(fill, target) {
+            return chart.get("colors").getIndex(series.columns.indexOf(target));
+        });
+
+        series.columns.template.adapters.add("stroke", function(stroke, target) {
+            return chart.get("colors").getIndex(series.columns.indexOf(target));
+        });
+
+        yAxis.data.setAll(data);
+        series.data.setAll(data);
+
+        var label_name = '';
+        if (num == 1){
+            label_name = 'COREA';
+        } else if (num == 2){
+            label_name = 'PRISM KR';
+        }
+
+        // chart label (title)
+        // chart.children.unshift(am5.Label.new(root, {
+        //     text: label_name,
+        //     fontSize: 15,
+        //     fontWeight: "500",
+        //     textAlign: "center",
+        //     x: am5.percent(50),
+        //     y: am5.percent(100),
+        //     centerX: am5.percent(50),
+        //     paddingTop: 0,
+        //     paddingBottom: 0
+        // }));
+
+
+        // Make stuff animate on load
+        series.appear(300);
+        chart.appear(1000, 100);          
+    }
+
+    $(document).ready(function() {
+        $.ajax({
+            url : "/",
+            type : "POST",
+            dataType : "JSON",
+            success: function(dataset){
+                var num = 1;
+                for (var data of dataset){
+                    am5.ready(function() {
+                        createChart("chartdiv"+String(num), data, num)
+                        num = num+1;
+                    });
+                }
+            }
+        });
+    });
+
+    
+    
+</script>

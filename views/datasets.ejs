@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+    <link rel="shortcut icon" href="/images/shortcut3.svg" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- MDBootstrap Datatables  -->
+    <link href="/mdb/css/addons/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <div class="stripe-space"></div>
+    <main class="datasets">
+        <div class="pie-chart-space">
+            <div class="pie-chart" id="chartdiv-biologics"></div>
+            <div class="pie-chart" id="chartdiv-gender"></div>
+            <div class="pie-chart" id="chartdiv-age"></div>
+        </div>
+        <div class="table-div">
+            <% if(results.length != 0) { %>
+                <table id="dtBasicExample" class="table table-hover results-table">
+                    <thead>
+                        <tr>
+                            <th class="table-thead">PRISM</th>
+                            <th class="table-thead">COREA</th>
+                            <th class="table-thead">Visit</th>
+                            <th class="table-thead">Day</th>
+                            <th class="table-thead">Biologics</th>
+                            <th class="table-thead">DNA</th>
+                            <th class="table-thead">Serum</th>
+                            <th class="table-thead">Plasma</th>
+                            <th class="table-thead">PBMC</th>
+                            <th class="table-thead">PAXgene</th>
+                            <th class="table-thead">Urine</th>
+                            <th class="table-thead">Sputum(Sup)</th>
+                            <th class="table-thead">Sputum(pellet)</th>
+                            <th class="table-thead">EBC</th>
+                            <th class="table-thead">Heparin(DNALink)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% results.forEach(function(result) { %>
+                            <!-- <tr onclick="location.href='/search/tab<%=result.visit %>?query=<%=result.PRISM %>'" style="cursor:pointer;">  -->
+                                <tr onclick="location.href='/search?query=<%=result.PRISM %>'" style="cursor:pointer;"> 
+                                <td><%=result.PRISM %></td>
+                                <td><%=result.COREA %></td>
+                                <% if(result.visit == 1) { %>
+                                    <td>1 (0M)</td>
+                                <% } else if(result.visit == 2){ %>
+                                    <td>2 (1M)</td>
+                                <% } else if(result.visit == 3){ %>
+                                    <td>2 (6M)</td>
+                                <% } else if(result.visit == 4){ %>
+                                    <td>4 (12M)</td>
+                                <% } else if(result.visit == 5){ %>
+                                    <td>악화방문 1</td>
+                                <% } else if(result.visit == 6){ %>
+                                    <td>악화방문 2</td>
+                                <% } else { %>
+                                    <td>악화방문 3</td>
+                                <% } %>
+                                <td><%=result.day %></td>
+                                <td><%=result.Biologics %></td>
+                                <td><%=result.DNA %></td>
+                                <td><%=result.Serum %></td>
+                                <td><%=result.Plasma %></td>
+                                <td><%=result.PBMC %></td>
+                                <td><%=result.PAXgene %></td>
+                                <td><%=result.Urine %></td>
+                                <td><%=result.Sputum_Sup %></td>
+                                <td><%=result.Sputum_pellet %></td>
+                                <td><%=result.EBC %></td>
+                                <td><%=result.Heparin_DNALink %></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+
+                </table>
+            <% } %>
+        </div>
+
+
+
+    </main>
+    <%- include('footer.ejs') %>
+    <script type="text/javascript" src="/mdb/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/mdb/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/mdb.min.js"></script>
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="/mdb/js/addons/datatables.min.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+    <script type="text/javascript">
+
+        //amchart
+        function createChart(div, data, value_name, category_name, label_name) {
+            var root = am5.Root.new(div);
+
+            // Set themes
+            root.setThemes([
+                am5themes_Animated.new(root)
+            ]);
+
+            // Create chart
+            var chart = root.container.children.push(
+                am5percent.PieChart.new(root, {
+                    endAngle: 270
+                })
+            );
+
+            // Create series
+            var series = chart.series.push(
+                am5percent.PieSeries.new(root, {
+                    valueField: value_name,
+                    categoryField: category_name,
+                    endAngle: 270
+                })
+            );
+            // series.ticks.template.setAll({ forceHidden: true });
+            var bgColor = root.interfaceColors.get("background");
+            series.slices.template.setAll({
+                stroke: bgColor,
+                strokeWidth: 1,
+                tooltipText: "{category}: {value} cases"
+                    // "{category}: {valuePercentTotal.formatNumber('0.00')}% ({value} COUNT(Biologics))"
+            });
+
+            // chart label (title)
+            chart.children.unshift(am5.Label.new(root, {
+                text: label_name,
+                fontSize: 15,
+                fontWeight: "500",
+                textAlign: "center",
+                x: am5.percent(50),
+                centerX: am5.percent(50),
+                paddingTop: 0,
+                paddingBottom: 10
+            }));
+
+            series.data.setAll(data);
+
+            series.states.create("hidden", {
+                endAngle: -90
+            });
+        }
+        $(document).ready(function () {
+            $('.results-table').DataTable();   
+            $('.dataTables_length').addClass('bs-select');  
+            am5.ready(function() {
+                data = <%- JSON.stringify(biologics) %>
+                createChart("chartdiv-biologics", data, "COUNT(p2.Biologics)", "Biologics", "Biologics")
+                data = <%- JSON.stringify(gender) %>
+                createChart("chartdiv-gender", data, "count(SEX_SYS_VAL)", "SEX_SYS_VAL", "Sex")
+                data = <%- JSON.stringify(age) %>
+                createChart("chartdiv-age", data, "count(c3.range)", "range", "Age")
+            });
+        });
+    </script>
+    <script>
+        document.querySelector(".search-bar-sticky").style.display = "none";
+        function submitForm(){
+            document.getElementById("search-form").submit();
+        }
+        let input = document.querySelector(".search-input");
+        input.addEventListener("keyup", function(event) {
+            if(event.keyCode === 13) {
+                event.preventDefault();
+                submitForm();
+            }
+        });
+        let submitBtn = document.querySelector(".search-form i");
+        submitBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+            submitForm();
+        });
+    
+        var sticky = input.offsetTop;
+        window.onscroll = function() {
+            if(window.pageYOffset >= sticky) {
+                document.querySelector(".search-bar-sticky").style.display = "flex";
+            } else {
+                document.querySelector(".search-bar-sticky").style.display = "none";
+            }
+        }
+        
+    </script>
+
+</body>
+</html>

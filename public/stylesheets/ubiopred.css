@@ -1,0 +1,31 @@
+.ubiopred {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5%;
+}
+
+.ubiopred .table-title {
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.ubiopred .table-title-information{
+    font-size: 20px;
+    padding-bottom: 18px;
+}
+
+.ubiopred .dropdown {
+    width: 20%;
+}
+
+.ubiopred .table-fileName{
+    width: 50%;
+    /* vertical-align: middle; */
+}
+
+.ubiopred .zipDownloadbutton {
+    border: 0;
+    background-color:transparent;
+}

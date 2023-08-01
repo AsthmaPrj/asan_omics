@@ -1,0 +1,41 @@
+.prismKR {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5%;
+
+}
+
+.prismKR .table-title {
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.prismKR .table-title-information{
+    font-size: 20px;
+    padding-bottom: 18px;
+}
+
+.prismKR .dropdown {
+    width: 35%;
+}
+
+.prismKR .download_button{
+    margin-bottom: 10px;
+}
+
+.prismKR .table_checkbox{
+    width: 3%;
+    vertical-align: middle;
+}
+
+.prismKR .table-fileName{
+    width: 50%;
+    /* vertical-align: middle; */
+}
+
+.prismKR .zipDownloadbutton {
+    border: 0;
+    background-color:transparent;
+}

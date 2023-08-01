@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+    <link rel="shortcut icon" href="/images/shortcut3.svg" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <div class="stripe-space"></div>
+    <main class="about">
+        <div class="about-platform">
+            <span class="about-platform__heading">Add dataset</span>
+        </div>
+        <div class="stage_platform">
+            <div class="stage">
+                <div class="stage3_1">Details of SERIES</div>
+                <div class="stage3_2">SAMPLE INFORMATION</div>
+                <div class="stage3_3">PROTOCOLS</div>
+            </div>
+            
+            <div class="information_set">
+                <span calss="information">
+                    This section includes protocols and fields which are common to all Samples.
+                    Protocols which are applicable to specific Samples or specific channels should be included in additional columns of the SAMPLES section instead.
+                </span>
+            </div>
+
+            <form action="/menu/Add-data/protocol" method="POST">
+                <div class="section">
+                    <div class="protocol_set">
+                        
+                        <p class="protocols"> Protocols </p>
+                        <div class="protocols_detail">
+                            <p class="detail"> Growth protocol </p>
+                            <input type="text" name="growth_protocol" class="form-control">
+                            <p class="detail"> Treatment protocol </p>
+                            <input type="text" name="treatment_protocol" class="form-control">
+                            <p class="detail"> Extract protocol </p>
+                            <input type="text" name="extract_protocol" class="form-control">
+                            <p class="detail"> Label protocol </p>
+                            <input type="text" name="label_protocol" class="form-control">
+                            <p class="detail"> Hyb protocol </p>
+                            <input type="text" name="hyb_protocol" class="form-control">
+                            <p class="detail"> Scan protocol </p>
+                            <input type="text" name="scan_protocol" class="form-control">
+                            <p class="detail"> Data processing </p>
+                            <input type="text" name="data_processing" class="form-control">
+                            <p class="detail"> Value definition </p>
+                            <input type="text" name="value_definition" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="submit_button">
+                    <button type="submit" class="btn btn-primary" name="btn_submit" id="btn_submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <%- include('footer.ejs') %>
+    <script>
+
+        // $(document).ready(function() {
+
+        //     $('#btn_submit').click(function(){
+        //         alert("complete!")
+        //     });
+            
+        // });
+    </script>
+</body>
+</html>

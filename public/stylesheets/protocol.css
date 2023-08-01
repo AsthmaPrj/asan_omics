@@ -1,0 +1,74 @@
+.stage_platform {
+    margin-left: 10em;
+    margin-right: 10em;
+    margin-top: 2em;
+}
+
+.stage {
+    margin-bottom: 3em;
+}
+
+.stage3_1 {
+    width: 33%;
+    height: 2em;
+    border-radius: 8px;
+    float: left;
+    background: rgb(245, 245, 245);
+    text-align: center;
+    line-height: 2em;
+    margin-right: 0.5%;
+    color: black;
+}
+
+.stage3_2 {
+    width: 33%;
+    height: 2em;
+    border-radius: 8px;
+    float: left;
+    background: rgb(245, 245, 245);
+    text-align: center;
+    line-height: 2em;
+    margin-right: 0.5%;
+    color: black;
+}
+
+.stage3_3 {
+    width: 33%;
+    height: 2em;
+    border-radius: 8px;
+    float: left;
+    background: #205492;
+    text-align: center;
+    line-height: 2em;
+    color: white;
+}
+
+.protocol_set{
+    background: rgb(245, 245, 245);
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 10px;
+}
+
+.protocols {
+    font-size: 22px;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+.protocols_detail {
+    font-size: 18px;
+}
+
+.detail {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.submit_button {
+    float: right;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}

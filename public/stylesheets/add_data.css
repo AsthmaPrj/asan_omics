@@ -1,0 +1,94 @@
+.stage {
+    margin-bottom: 3em;
+}
+
+.stage1_1 {
+    width: 33%;
+    height: 2em;
+    border-radius: 8px;
+    float: left;
+    background: #205492;
+    text-align: center;
+    line-height: 2em;
+    color: white;
+    margin-right: 0.5%;
+}
+
+.stage1_2 {
+    width: 33%;
+    height: 2em;
+    border-radius: 8px;
+    float: left;
+    background: rgb(245, 245, 245);
+    text-align: center;
+    line-height: 2em;
+    margin-right: 0.5%;
+}
+
+.stage1_3 {
+    width: 33%;
+    height: 2em;
+    border-radius: 8px;
+    float: left;
+    background: rgb(245, 245, 245);
+    text-align: center;
+    line-height: 2em;
+}
+
+.information_set {
+    background:#A8CEDB;
+    padding: 2em;
+    margin-bottom: 0.5em;
+    border-radius: 10px;
+}
+
+.information{
+    line-height: 200%;
+}
+
+.information_detail {
+    margin-top: 2em;
+}
+
+.section {
+    background:white;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 10px;
+}
+
+.title_set, .select_omics_type_set, .summary_set, .overall_design_set, .contributor_information_set {
+    background: rgb(245, 245, 245);
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 10px;
+}
+
+.title, .select_omics_type, .summary, .overall_design, .contributor_information {
+    font-size: 20px;
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+.contributor_information_detail {
+    font-size: 18px;
+}
+
+.contributors, .contact_name, .organization_name, .department, .lab, .country {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+} 
+
+textarea {
+    resize: none;
+}
+
+.cancle_save_set {
+    float: right;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+}
+

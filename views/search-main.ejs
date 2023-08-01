@@ -1,0 +1,316 @@
+<main class="search__main">
+    <div class="search__wrapper">
+        <span>SEARCH FOR</span>
+        <div class="search-bar">
+            <form action="/search" method="get" id="search-form" class="search-form">
+                <input type="text" class="search-input" name="query" placeholder="search" value=<%=keyword%> >
+                <i class="fas fa-search fa-2x"></i>
+            </form>
+        </div>
+    </div>
+    <!-- <div class="search__tab">
+        <h1 class="table-title">Datasets</h1>
+        <h1 class="table-title-information">The table below lists the available sample for each data type.</h1>
+        <ul class="tab-list">
+            <% if(id == "tab1") { %>
+                <li class="tab selected">
+            <% } else { %>
+                <li class="tab">
+            <% } %>
+            <a href="/search/tab1?query=<%=keyword%>">visit1</a></li>
+            <% if(id == "tab2") { %>
+                <li class="tab selected">
+            <% } else { %>
+                <li class="tab">
+            <% } %>
+            <a href="/search/tab2?query=<%=keyword%>">visit2</a></li>
+            <% if(id == "tab3") { %>
+                <li class="tab selected">
+            <% } else { %>
+                <li class="tab">
+            <% } %>
+            <a href="/search/tab3?query=<%=keyword%>">visit3</a></li>
+            <% if(id == "tab4") { %>
+                <li class="tab selected">
+            <% } else { %>
+                <li class="tab">
+            <% } %>
+            <a href="/search/tab4?query=<%=keyword%>">visit4</a></li>
+            <% if(id == "tab5") { %>
+                <li class="tab selected">
+            <% } else { %>
+                <li class="tab">
+            <% } %>
+            <a href="/search/tab5?query=<%=keyword%>">악화방문1</a></li>
+            <% if(id == "tab6") { %>
+                <li class="tab selected">
+            <% } else { %>
+                <li class="tab">
+            <% } %>
+            <a href="/search/tab6?query=<%=keyword%>">악화방문2</a></li>
+            <% if(id == "tab7") { %>
+                <li class="tab selected">
+            <% } else { %>
+                <li class="tab">
+            <% } %>
+            <a href="/search/tab7?query=<%=keyword%>">악화방문3</a></li>
+        </ul>
+    </div> -->
+    <div class="search__result">
+        <!-- <% if(tables.length != 0) { %>
+            <% tables.forEach(function(table) { %>
+                <div class="table-div">
+                <% if(table.data.results.length == 0) { %>
+                    <h1 class="table-title-information">No results found.</h1>
+                <% } else{ %> 
+                    <table class="table table-information">
+                        <% table.data.results.forEach(function(result) { %>
+                            <thead>
+                                <tr>
+                                    <th class="table-thead">COREA</th>
+                                    <th class="table-thead">Day</th>
+                                    <th class="table-thead">Biologics</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td><%=result.COREA %></td>
+                                    <td><%=result.day %></td>
+                                    <td><%=result.Biologics %></td>
+                                </tr>
+                            </tbody>
+                        <% }); %>
+                    </table>
+                    <table id="dtBasicExample" class="results-table table table-hover">
+                        <% table.data.results.forEach(function(result) { %>
+                            <thead>
+                                <tr>
+                                    <th class="table-thead">Sample type</th>
+                                    <th class="table-thead">Sample name</th>
+                                    <th class="table-thead">Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>DNA</th>
+                                    <% if(result.DNA == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.DNA %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.DNA %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>Serum</th>
+                                    <% if(result.Serum == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.Serum %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.Serum %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>Plasma</th>
+                                    <% if(result.Plasma == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.Plasma %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.Plasma %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>PBMC</th>
+                                    <% if(result.PBMC == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.PBMC %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.PBMC %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>PAXgene</th>
+                                    <% if(result.PAXgene == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.PAXgene %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.PAXgene %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>Urine</th>
+                                    <% if(result.Urine == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.Urine %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.Urine %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>Sputum(Sup)</th>                      
+                                    <% if(result.Sputum_Sup == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.Sputum_Sup %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.Sputum_Sup %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>Sputum(pellet)</th>
+                                    <% if(result.Sputum_pellet == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.Sputum_pellet %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.Sputum_pellet %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>EBC</th>
+                                    <% if(result.EBC == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.EBC %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.EBC %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                                <tr>
+                                    <th>Heparin(DNALink)</th>
+                                    <% if(result.Heparin_DNALink == 0) { %>
+                                        <td>No sample</td>
+                                        <td></td>
+                                    <% } else{ %>
+                                        <td><%=result.Heparin_DNALink %></td>
+                                        <td>
+                                            <form method="GET", action="/search/id=<%=keyword%>/file=<%=result.Heparin_DNALink %>">
+                                                <input type="image" src="/images/download.png" width="20" alt="download" >
+                                            </form>
+                                        </td>
+                                    <% } %>
+                                </tr>
+                            </tbody>
+                        <% }); %>
+                    </table>
+                <% } %>
+                
+                </div>
+            <%  }); %>
+        <% }%> 
+        <hr> -->
+        <div class="clinical-dataset">
+            <h1 class="table-title">Clinical information</h1>
+            <% if(tables.length != 0) { %>
+                <% tables.forEach(function(table) { %>
+                    <% if(table.data.clinicalResults.length == 0) { %>
+                        <h1 class="table-title-information">No results found.</h1>
+                    <% } else{ %> 
+                        <h1 class="table-title-information">The table below shows the clinical information for the patient.</h1>
+                        <div class="dropdown">
+                            <select name="select_box" id="select_box" class="form-control">
+                                <% table.data.clinicalResults.forEach(function(result, index) { %>
+                                    <option value="<%=result.VISITNM %>"><%=result.VISITNM %></option>
+                                <% }); %>
+                            </select>
+                        </div> 
+                        <div class="table-div">
+                            <table class=" table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="table-clinical-thead-item">항목명</th>
+                                        <th class="table-clinical-thead-value">값</th>   
+                                        <th class="table-clinical-thead-item">항목명</th>
+                                        <th class="table-clinical-thead-value">값</th>  
+                                    </tr>
+                                </thead>
+                                <tbody id="clinical-table-tbody">
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    <% } %> 
+                <% }); %>
+            <% } %>
+        </div>   
+    </div>
+
+    <div class="search-bar-sticky">
+        <span>platform</span>
+        <form action="/search" method="get" id="search-form">
+            <input type="text" class="search-input-sticky" name="query" placeholder="search" />
+            <i class="fas fa-search fa-2x"></i>
+        </form>
+    </div>
+</main>
+
+<script>
+    document.querySelector(".search-bar-sticky").style.display = "none";
+    function submitForm(){
+        document.getElementById("search-form").submit();
+    }
+    let input = document.querySelector(".search-input");
+    input.addEventListener("keyup", function(event) {
+        if(event.keyCode === 13) {
+            event.preventDefault();
+            submitForm();
+        }
+    });
+    let submitBtn = document.querySelector(".search-form i");
+    submitBtn.addEventListener("click", function(event) {
+        event.preventDefault();
+        submitForm();
+    });
+
+    var sticky = input.offsetTop;
+    window.onscroll = function() {
+        if(window.pageYOffset >= sticky) {
+            document.querySelector(".search-bar-sticky").style.display = "flex";
+        } else {
+            document.querySelector(".search-bar-sticky").style.display = "none";
+        }
+    }
+</script>
+

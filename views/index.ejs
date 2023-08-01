@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+    <link rel="shortcut icon" href="/images/shortcut3.svg" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- MDBootstrap Datatables  -->
+    <link href="/mdb/css/addons/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/js/bootstrap.min.js"></script>
+
+    
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <%- include('main.ejs') %>
+    <%- include('footer.ejs') %>
+    <script type="text/javascript" src="/mdb/js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="/mdb/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="/mdb/js/mdb.min.js"></script>
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="/mdb/js/addons/datatables.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script src="/modal/js/jquery.loadingModal.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('body').loadingModal('hide');
+        });
+
+        $(window).on('beforeunload', function() {
+            $('body').loadingModal({
+                    position: 'auto',
+                    text: 'Loading...',
+                    color: '#fff',
+                    opacity: '0.7',
+                    backgroundColor: 'rgb(0,0,0)',
+                    animation: 'doubleBounce'
+                });
+        });
+    </script>
+
+</body>
+</html>

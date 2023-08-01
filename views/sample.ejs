@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+    <link rel="shortcut icon" href="/images/shortcut3.svg" type="image/x-icon">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <script src="/js/jquery.min.js"></script> 
+    <script src="/js/jquery.js"></script> 
+    <script src="/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    <%- include('header.ejs') %>
+    <div class="stripe-space"></div>
+    <main class="about">
+        <div class="about-platform">
+            <span class="about-platform__heading">Add dataset</span>
+        </div>
+        <div class="stage_platform">
+            <div class="stage">
+                <div class="stage2_1">Details of SERIES</div>
+                <div class="stage2_2">SAMPLE INFORMATION</div>
+                <div class="stage2_3">PROTOCOLS</div>
+            </div>
+            
+            <div class="information_set">
+                <span calss="information">The Sample information written in this section must match the sample datasets you uploaded. Please check your sample names from your dataset before submitting the information.
+                </span>
+            </div>
+            <div class="add_sample_information">
+                <form action="/menu/Add-data/sample" method="POST">
+                    <div class="section">
+                        <div class="sample_information_set">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <p class="sample_information"> Sample Information </p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-primary ajaxsend" id="btn_add">Add row</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Sample name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="sample_name" id="sample_name">
+                                    <small class="text-muted">
+                                        Unique name that matches a corresponding header in the sample dataset.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Title</label>
+                                <div class="col-sm-10">
+                                    <textarea type="text" name="title" class="form-control" id="title"></textarea>
+                                    <small class="text-muted">
+                                        Unique title that describes the Sample. We suggest that you use the convention: 
+                                        [biomaterial]-[condition(s)]-[replicate number], e.g., Muscle_exercised_60min_rep2.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Source name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="source_name" id="source_name">
+                                    <small class="text-muted">
+                                        Briefly identify the biological material and the experimental variable(s), e.g., vastus lateralis muscle, exercised, 60 min.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Molecule</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="molecule" id="molecule">
+                                    <small class="text-muted">
+                                        Type of molecule that was extracted from the biological material. Include one of the following: total RNA, polyA RNA, cytoplasmic RNA, nuclear RNA, genomic DNA, protein, or other.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Label</label>
+                                <div class="col-sm-10">
+                                    <textarea type="text" name="label" class="form-control" id="label"></textarea>
+                                    <small class="text-muted">
+                                        Compound used to label the extract e.g., biotin, Cy3, Cy5, 33P.
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="description" id="description">
+                                    <small class="text-muted">
+                                        Additional information not provided in the other fields, or paste in broad descriptions that cannot be easily dissected into the other fields.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="table" id="sample_information_table">
+                        </div>
+                    </div>
+                    <div class="cancle_save_set">
+                        <button type="button" class="btn btn-link" name="btn_cancle">Cancle</button>
+                        <button type="submit" class="btn btn-primary" name="btn_save" id = 'btn_save'>Save & Continue</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+    <%- include('footer.ejs') %>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+
+            $('#sample_information_table').on("click", "button", function() {
+                var parent = $(this).parent().parent().parent();
+                var sample_name = parent.find('#sample_name').attr('name');
+                parent.remove();
+  
+                $.ajax({
+                    url : "/menu/Add-data/ajaxRemove",
+                    type : "POST",
+                    dataType : "JSON",
+                    data : {"sample_name" : sample_name}                  
+                });
+
+            });
+
+            $("#btn_add").on("click", function(){
+                var sample_name = $('#sample_name').val()
+                var title = $('#title').val()
+                var source_name = $('#source_name').val()
+                var molecule = $('#molecule').val()
+                var label = $('#label').val()
+                var description = $('#description').val()
+
+                $.ajax({
+                    url : "/menu/Add-data/ajax",
+                    type : "POST",
+                    dataType : "JSON",
+                    data : {"sample_name" : sample_name, "title" : title, "source_name" : source_name, "molecule" : molecule, "label" : label, "description" : description}
+                });
+
+                var insert = '<div class="sample_information_set" id="row"><div class="row">\
+                    <div class="col-sm-11"><p class="sample_information"> Sample Information </p>\
+                    </div><div class="col-sm-1"><button type="button" class="btn btn-danger" id="btn_remove">Remove</button></div></div>\
+                     <label class="col-sm-2 col-form-label">Sample name</label><label class="col-sm-10 col-form-label" name="'+sample_name+'"id="sample_name">'
+                insert += sample_name
+                insert += '</label><label class="col-sm-2 col-form-label">Title</label><label class="col-sm-10 col-form-label" id="title">'
+                insert += title
+                insert += '</label><label class="col-sm-2 col-form-label">Source name</label><label class="col-sm-10 col-form-label id="source_name">'
+                insert += source_name
+                insert += '</label><label class="col-sm-2 col-form-label">Molecule</label><label class="col-sm-10 col-form-label" id="molecule">'
+                insert += molecule
+                insert += '</label><label class="col-sm-2 col-form-label">Label</label><label class="col-sm-10 col-form-label" id="label">'
+                insert += label
+                insert += '</label><label class="col-sm-2 col-form-label">Description</label><label class="col-sm-10 col-form-label" id="description">'
+                insert += description
+                insert += '</label></div>'
+                $('#sample_information_table').append(insert)
+                $('#sample_name').val("")
+                $('#title').val("")
+                $('#source_name').val("")
+                $('#molecule').val("")
+                $('#label').val("")
+                $('#description').val("")
+            });
+
+        });
+    </script>
+</body>
+</html>

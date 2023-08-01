@@ -1,0 +1,36 @@
+.prismUK {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 5%;
+
+}
+
+.prismUK .table-title {
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.prismUK .table-title-information{
+    font-size: 20px;
+    padding-bottom: 18px;
+}
+
+.prismUK .dropdown {
+    width: 35%;
+}
+
+.prismUK .download_button{
+    margin-bottom: 10px;
+}
+
+.prismUK .table-fileName{
+    width: 50%;
+    /* vertical-align: middle; */
+}
+
+.prismUK .zipDownloadbutton {
+    border: 0;
+    background-color:transparent;
+}

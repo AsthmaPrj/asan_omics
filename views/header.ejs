@@ -1,0 +1,87 @@
+<header class="header">
+    <div class="header__header-sm">
+        <div class="header__sm-logo">
+            <%- include('smLogo.ejs') %>
+        </div>
+        <!-- <div class="header__sm-title">
+            <span class="sm-title">Asan Medical Center</span>
+        </div> -->
+        <% if(session){ %>
+            <div class="user_info">
+                <div class="user_info_name">
+                    <!-- <span><%= session.user %></span> -->
+                    <%= session.user %>
+                </div>
+                <div class="logout_button">
+                    <form action="/users/logout" method="get">
+                        <input type="submit" value="LOGOUT" class="btn btn-link btn-sm">
+                    </form>
+                </div>
+            </div>
+        <% } else{ %>
+            <div class="user_info">
+                <div class="login_button">
+                    <button type="button" class="btn btn-link btn-sm" onclick="location.href='/users/login'">LOGIN</button>
+                </div>
+            </div>
+        <% } %>
+    </div>
+    <div class="header__header-platform">
+        <div class="header__platform-title">
+            <a href="/"><span class="platform-title">Multi-Omics Platform</span></a>
+        </div>
+        <div class="header__platform-menu">
+            <ul class="platform__menu-list">
+                <!-- <li class="menu">
+                    <a href="/menu/datasets">PRISM</a>
+                </li> -->
+                <li class="nav-item dropdown menu">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PRISM
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="/menu/prismKR">KR</a>
+                      <a class="dropdown-item" href="/menu/prismUK">UK</a>
+                      
+                      <% if(session && session.user == 'asthma_omics'){ %>
+                      <a class="dropdown-item" href="/menu/datasets">Clinical information (KR)</a>
+                      <% } %>
+                    </div>
+                </li>
+                <li class="menu">
+                    <a href="/menu/corea">COREA</a>
+                </li>
+                <li class="menu">
+                    <a href="/menu/ubiopred">U-BIOPRED</a>
+                </li>
+                <!-- <li class="menu">
+                    <a href="/menu/Add-data">Add Data</a>
+                </li> -->
+                <!-- <li class="menu">
+                    <a href="/menu/about">About</a>
+                </li> -->
+                <li class="menu">
+                    <a href="/menu/contact">Contact</a>
+                </li>
+                <!-- <li class="menu">
+                    <a href="javascript:void(0);" onclick="helpHandler();">Help</a>
+                </li> -->
+            </ul>
+        </div>
+        <div class="header__platform-menu-dropdown">
+            <i class="fas fa-bars fa-2x"></i>
+            <div class="dropdown-content">
+                <a href="/menu/datasets">Datasets</a>
+                <a href="/menu/Add-data">Add Data</a>
+                <a href="/menu/about">About</a>
+                <a href="/menu/contact">Contact</a>
+                <a href="javascript:void(0);" onclick="helpHandler();">Help</a>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    function helpHandler() {
+        document.querySelector('footer').scrollIntoView();
+    }
+</script>
