@@ -15,9 +15,7 @@ module.exports = {
             filedir = '/data/projects/asan_omics/prism_kr/genomics/whole_blood';
         }
         else if(omicsName == 'Transcriptomics(Single cell RNA (PBMC))'){
-            // filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/single_cell_rna_PBMC/scRNA-Seq_AMC_Kimtaebum/Rawdata/compress'
-            filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/single_cell_rna_PBMC/210803_compress'
-
+            filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/single_cell_rna_PBMC/scRNA-Seq_AMC_Kimtaebum/Rawdata/compress'
         }
         else if(omicsName == 'Transcriptomics(Total RNA (PBMC))'){
             filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/total_rna_PBMC';
@@ -63,8 +61,7 @@ module.exports = {
             filedir = '/data/projects/asan_omics/prism_kr/genomics/whole_blood';
         }
         else if(omicsName == 'Transcriptomics(Single cell RNA (PBMC))'){
-            // filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/single_cell_rna_PBMC/scRNA-Seq_AMC_Kimtaebum/Rawdata/compress'
-            filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/single_cell_rna_PBMC/210803_compress'
+            filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/single_cell_rna_PBMC/scRNA-Seq_AMC_Kimtaebum/Rawdata/compress'
         }
         else if(omicsName == 'Transcriptomics(Total RNA (PBMC))'){
             filedir = '/data/projects/asan_omics/prism_kr/transcriptomics/total_rna_PBMC';

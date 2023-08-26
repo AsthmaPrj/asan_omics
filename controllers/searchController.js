@@ -147,32 +147,12 @@ module.exports = {
     searchClinicalData: function(req, res, next){
         var body = req.body;
         const visitnm = body.visitnm;
-        const id = req.params.query.split('=')[1];
+        const id = req.params.id.split('=')[1];
 
         // console.log("visitnm", visitnm);
         clinicalModel.selectClinicalData(visitnm, id).then((result =>{
             res.json(result[0]);
         }));
 
-    }, 
-    searchDetailedValue: function(req, res, next){
-        let session = req.session.passport;
-
-        const id = req.query.id;         
-        const value = req.query.value;   
-
-        clinicalModel.selectDetailedValue(id, value).then((result =>{
-            //string to float
-            for(var i = 0; i < result.length; i++){
-                var obj = result[i];
-                for(var prop in obj){
-                    if(obj.hasOwnProperty(prop) && obj[prop] !== null && !isNaN(obj[prop])){
-                        obj[prop] = +obj[prop];   
-                    }
-                }
-            }
-            keyList = Object.keys(result[0]);
-            res.render('search_dataset_plot', {result: result, session:session, keyword:id, keyList:keyList});
-        }));
     }
 }

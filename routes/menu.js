@@ -6,8 +6,6 @@ var datasetsController = require('../controllers/datasetsController');
 var coreaController = require('../controllers/coreaController');
 var prismUKController = require('../controllers/prismUKController');
 var prismKRController = require('../controllers/prismKRController');
-var chartController = require('../controllers/chartController');
-
 var util = require('./util');
 
 var session = require('express-session'); 
@@ -40,7 +38,6 @@ var session = require('express-session');
 
 
 /* GET home page. */
-
 router.get('/datasets',util.isAuthenticatedForClinicalInformationKR, datasetsController.selectAllData);
 
 router.get('/prismKR',util.isAuthenticated, function(req, res, next) {

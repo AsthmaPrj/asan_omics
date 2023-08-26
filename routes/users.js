@@ -75,9 +75,8 @@ passport.use(new LocalStrategy( // Local 저장 방식을 통한 인증 구현
       // ['local:' + username],
       [username],
       function (err, results) {
-        if (err) {return done(err);} // 입력한 유저정보가 mysql 내 존재하지 않는 경우 1
-        if (!results[0]) {return done(err);} // 입력한 유저정보가 mysql 내 존재하지 않는 경우 2
-        
+        if (err) return done(err); // 입력한 유저정보가 mysql 내 존재하지 않는 경우 1
+        if (!results[0]) return done(err); // 입력한 유저정보가 mysql 내 존재하지 않는 경우 2
         var user = results[0]; // 적절한 유저정보가 존재하는 경우
 
         if(password === user.password){

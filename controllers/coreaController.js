@@ -12,96 +12,24 @@ module.exports = {
         var filedir = '';
 
         if (omicsName == 'RNA-seq(PBMC)'){
-            filedir = '/data/projects/asan_omics/corea/rna-seq/211122_compress';
-            filedir_raw = '/data/projects/asan_omics/corea/rna-seq/211122';
+            filedir = '/data/projects/asan_omics/corea/rna-seq';
         }
         else if(omicsName == 'Methyl-seq(Blood)'){
-            filedir = '/data/projects/asan_omics/corea/methyl_seq/211122_compress';
-            filedir_raw = '/data/projects/asan_omics/corea/methyl_seq/211122';
-
+            filedir = '/data/projects/asan_omics/corea/methyl_seq';
         }
         else if(omicsName == 'GWAS'){
-            // filedir = '/data/projects/asan_omics/corea/gwas/CELfile_593sample_compress';
-            filedir = '/data/projects/asan_omics/corea/gwas/210803_compress';
-            filedir_raw = filedir;
-            
+            filedir = '/data/projects/asan_omics/corea/gwas/CELfile_593sample_compress';
         }
         else if(omicsName == 'proteomics(Plasma)'){
             // filedir = '/data/projects/asan_omics/corea/proteomics/compress';
             filedir = '/data/projects/asan_omics/corea/proteomics';
-            filedir_raw = filedir;
         }
         else if(omicsName == 'Metabolomics(plasma)'){
             filedir = '/data/projects/asan_omics/corea/metabolomics';
-            filedir_raw = filedir;
-        }
-        else if(omicsName == 'Metagenomics(EBC)'){
-            filedir = '/data/projects/asan_omics/corea/metagenomics';
-            filedir_raw = filedir;
         }
 
-        // fs.readdir(filedir, function(error, filelist){
-        //     res.json(filelist);
-        // })
-        // var fileExtension = {}
-        // fs.readdir(filedir_raw, function(error, filelist){
-        //     console.log(filelist)
-        //     for(var file of filelist){
-        //         var extension = file.split('.').slice(-1)[0];
-        //         if (extension in fileExtension){
-        //             fileExtension[extension] += 1
-        //         }else{
-        //             fileExtension[extension] = 1
-        //         }
-        //     }
-        // });
-        
         fs.readdir(filedir, function(error, filelist){
-            var fileSizelist = [];
-            var fileSizeSum = 0;
-            for(var file of filelist){
-                file_all_dir = filedir + '/'+file;
-                var stats = fs.statSync(file_all_dir);
-                var fileSize = Math.round(stats.size/(1024*1024)*100)/100;
-                var fileSize = stats.size;
-                fileSizeSum += fileSize;
-                if (fileSize > 1024*1024*1024){
-                    fileSize = Math.round(stats.size/(1024*1024*1024)*100)/100;
-                    fileSizelist.push(fileSize+' GB');
-                }
-                else{
-                    fileSize = Math.round(stats.size/(1024*1024)*100)/100;
-                    fileSizelist.push(fileSize+' MB');
-                }
-                
-            }
-            if (fileSizeSum > 1024*1024*1024*1024){
-                fileSizeSum = Math.round(fileSizeSum/(1024*1024*1024*1024)*100)/100;
-                fileSizeSum = fileSizeSum+' TB';
-            }
-            else if(fileSizeSum > 1024*1024*1024){
-                fileSizeSum = Math.round(fileSizeSum/(1024*1024*1024)*100)/100;
-                fileSizeSum = fileSizeSum+' GB';
-            }
-            else{
-                fileSizeSum = Math.round(fileSizeSum/(1024*1024)*100)/100;
-                fileSizeSum = fileSizeSum+' MB';
-            }
-
-            var fileExtension = {};
-            fs.readdir(filedir_raw, function(error, filelist2){
-                for(var file of filelist2){
-                    var extension = file.split('.').slice(-1)[0];
-                    if (extension in fileExtension){
-                        fileExtension[extension] += 1;
-                    }else{
-                        fileExtension[extension] = 1;
-                    }
-                }
-                res.json({filelist:filelist, fileSizelist:fileSizelist, fileExtension:fileExtension, fileSizeSum:fileSizeSum});
-            });
-            
-
+            res.json(filelist);
         })
     },
 
@@ -168,14 +96,13 @@ module.exports = {
         const file = req.params.file.split('=')[1];
 
         if (omicsName == 'RNA-seq(PBMC)'){
-            filedir = '/data/projects/asan_omics/corea/rna-seq/211122_compress';
+            filedir = '/data/projects/asan_omics/corea/rna-seq';
         }
         else if(omicsName == 'Methyl-seq(Blood)'){
-            filedir = '/data/projects/asan_omics/corea/methyl_seq/211122_compress';
+            filedir = '/data/projects/asan_omics/corea/methyl_seq';
         }
         else if(omicsName == 'GWAS'){
-            // filedir = '/data/projects/asan_omics/corea/gwas/CELfile_593sample_compress';
-            filedir = '/data/projects/asan_omics/corea/gwas/210803_compress';
+            filedir = '/data/projects/asan_omics/corea/gwas/CELfile_593sample_compress';
         }
         else if(omicsName == 'proteomics(Plasma)'){
             // filedir = '/data/projects/asan_omics/corea/proteomics/compress';
@@ -183,9 +110,6 @@ module.exports = {
         }
         else if(omicsName == 'Metabolomics(plasma)'){
             filedir = '/data/projects/asan_omics/corea/metabolomics';
-        }
-        else if(omicsName == 'Metagenomics(EBC)'){
-            filedir = '/data/projects/asan_omics/corea/metagenomics';
         }
 
         dir = filedir + "/" + file;

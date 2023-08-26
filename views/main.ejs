@@ -27,18 +27,7 @@
                 </ul>
             </div>
         </div>
-        <div class="dataset-chart-space">
-            <div class="dataset-chart-title">
-                <div class="line-chart-title">COREA</div>
-                <div class="line-chart-title">PRISM KR</div>
-            </div>
-            <div class="dataset-chart">
-                <div class="line-chart" id="chartdiv1"></div>
-                <div class="line-chart" id="chartdiv2"> </div>
-            </div>
-        </div>
     </div>
-    
     <div class="platform-description">
         <div class="description__wrapper">
             <span class="description-heading"><center>Precision Medicine in Severe Asthma: <br>Korea-UK PRISM study consortium</center></span>
@@ -58,14 +47,7 @@
     </div>
 </main>
 
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-<!-- <script src="//www.amcharts.com/lib/4/core.js"></script>
-<script src="//www.amcharts.com/lib/4/charts.js"></script>
-<script src="//www.amcharts.com/lib/4/themes/animated.js"></script> -->
 <script>
-      
     document.querySelector(".search-bar-sticky").style.display = "none";
     function submitForm(){
         document.getElementById("search-form").submit();
@@ -91,133 +73,4 @@
             document.querySelector(".search-bar-sticky").style.display = "none";
         }
     }
-
-    //amchart
-    function createChart(div, data, num) {
-        var root = am5.Root.new(div);
-    
-        // Set themes
-        root.setThemes([
-            am5themes_Animated.new(root)
-        ]);
-
-        // Create chart
-        var chart = root.container.children.push(am5xy.XYChart.new(root, {
-            panX: true,
-            panY: true,
-            // wheelX: "panX",
-            // wheelY: "zoomX",
-            // pinchZoomX:true,fon
-        }));
-
-        // Add cursor
-        var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {}));
-        cursor.lineY.set("visible", false);
-
-        // Create axes
-        var yRenderer = am5xy.AxisRendererY.new(root, { minGridDistance: 30 });
-            yRenderer.labels.template.setAll({
-            rotation: 0,
-            centerY: am5.p50,
-            centerX: am5.p50,
-            paddingRight: 10,
-        });
-
-        var yAxis = chart.yAxes.push(am5xy.CategoryAxis.new(root, {
-            maxDeviation: 0.3,
-            categoryField: "name",
-            renderer: yRenderer,
-            tooltip: am5.Tooltip.new(root, {}),
-        }));
-
-        var xAxis = chart.xAxes.push(am5xy.ValueAxis.new(root, {
-            maxDeviation: 0.3,
-            renderer: am5xy.AxisRendererX.new(root, {})
-        }));
-        var myTheme = am5.Theme.new(root);
-
-        myTheme.rule("AxisLabel").setAll({
-        fill: am5.color(0xFFFFFF),
-        });
-        myTheme.rule("Grid").setAll({
-            stroke: am5.color(0xFFFFFF),
-            strokeWidth: 2
-        });
-        root.setThemes([
-            myTheme
-        ]);
-
-        // Create series
-        var series_name = "Series "+String(num)
-        var series = chart.series.push(am5xy.ColumnSeries.new(root, {
-            name: series_name,
-            xAxis: xAxis,
-            yAxis: yAxis,
-            valueXField: "num",
-            sequencedInterpolation: true,
-            categoryYField: "name",
-            tooltip: am5.Tooltip.new(root, {
-                labelText:"{valueX}"
-            })
-        }));
-
-
-
-        series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
-        series.columns.template.adapters.add("fill", function(fill, target) {
-            return chart.get("colors").getIndex(series.columns.indexOf(target));
-        });
-
-        series.columns.template.adapters.add("stroke", function(stroke, target) {
-            return chart.get("colors").getIndex(series.columns.indexOf(target));
-        });
-
-        yAxis.data.setAll(data);
-        series.data.setAll(data);
-
-        var label_name = '';
-        if (num == 1){
-            label_name = 'COREA';
-        } else if (num == 2){
-            label_name = 'PRISM KR';
-        }
-
-        // chart label (title)
-        // chart.children.unshift(am5.Label.new(root, {
-        //     text: label_name,
-        //     fontSize: 15,
-        //     fontWeight: "500",
-        //     textAlign: "center",
-        //     x: am5.percent(50),
-        //     y: am5.percent(100),
-        //     centerX: am5.percent(50),
-        //     paddingTop: 0,
-        //     paddingBottom: 0
-        // }));
-
-
-        // Make stuff animate on load
-        series.appear(300);
-        chart.appear(1000, 100);          
-    }
-
-    $(document).ready(function() {
-        $.ajax({
-            url : "/",
-            type : "POST",
-            dataType : "JSON",
-            success: function(dataset){
-                var num = 1;
-                for (var data of dataset){
-                    am5.ready(function() {
-                        createChart("chartdiv"+String(num), data, num)
-                        num = num+1;
-                    });
-                }
-            }
-        });
-    });
-
-    
-    
 </script>

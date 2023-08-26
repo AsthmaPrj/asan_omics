@@ -19,12 +19,12 @@
 }
 
 .corea .dropdown {
-    width: 30%;
+    width: 20%;
 }
 
-/* .corea .download_button{
+.corea .download_button{
     margin-bottom: 10px;
-} */
+}
 
 .corea .table_checkbox{
     width: 3%;
@@ -32,81 +32,11 @@
 }
 
 .corea .table-fileName{
-    width: 30%;
+    width: 50%;
     /* vertical-align: middle; */
 }
-.corea .table-datasize{
-    width: 30%;
-    text-align: right;
-}
-.corea .table-downloadButton {
-    width: 40%;
-    text-align:center;
-}
+
 .corea .zipDownloadbutton {
     border: 0;
     background-color:transparent;
-    text-align:center;
-}
-
-.corea .table-fileName-td{
-    width: 30%;
-}
-.corea .table-datasize-td{
-    width: 30%;
-    text-align: right;
-}
-.corea .table-downloadButton-td-sub {
-    border: 0;
-    background-color:transparent;
-    text-align:center;
-}
-.table-downloadButton-td{
-    text-align:center;
-    width: 40%;
-}
-.chart-extension{
-    width: 50%;
-    height: 200px;
-}
-
-.table-header {
-    display: flex;
-  }
-
-.table-header-title{
-    width: 70%;
-}
-
-.table-information{
-    display: flex;
-    width: 30%;
-}
-
-.table-information-extension{
-    width: 50%;
-    /* border:1px solid;
-    border-radius: 20%; */
-    padding:10px;
-    margin: 15px;
-    display: flex;
-}
-
-.table-information-filesize{
-    width: 50%;
-    /* border:1px solid; */
-    padding:10px;
-    margin: 15px;
-    display: flex;
-}
-
-.information-filesize{
-    font-size: 18px;
-    margin-left: 10px;
-}
-
-.information-extension{
-    font-size: 18px;
-    margin-left: 10px;
-    padding-bottom: 10px;
 }

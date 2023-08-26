@@ -18,17 +18,3 @@
     font-weight: 600;
     padding-bottom: 20px;
 }
-
-.pie-chart-space {
-    display: flex;
-    height: 220px;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.pie-chart {
-    flex: 1;
-    font-size: 12px;
-    height: 200px;
-}
-

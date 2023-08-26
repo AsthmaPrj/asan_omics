@@ -25,6 +25,7 @@ router.get('/', util.isAuthenticatedForClinicalInformationKR, function(req, res,
   const id = req.query.query;
   let session = req.session.passport;
   console.log(session);
+
   sampleModel.searchData(keyword, 1).then((result => {
     clinicalModel.searchClinicalData(id).then((clinicalResult =>{
       res.render('search', {session:session, keyword: keyword, id: tab, tables:[{data: {results:result, clinicalResults:clinicalResult}}]});
@@ -32,12 +33,7 @@ router.get('/', util.isAuthenticatedForClinicalInformationKR, function(req, res,
   }));  
 });
 
-// router.post('/:tab', util.isAuthenticatedForClinicalInformationKR, searchController.searchData);
-// router.get('/:id/:file', searchController.downloadData);
-router.post('/:query/ajax', searchController.searchClinicalData);
-router.get('/chart', util.isAuthenticatedForClinicalInformationKR, searchController.searchDetailedValue);    
-
-
-
-
+router.get('/:tab', util.isAuthenticatedForClinicalInformationKR, searchController.searchData);
+router.get('/:id/:file', searchController.downloadData);
+router.post('/:id/ajax', searchController.searchClinicalData);
 module.exports = router;

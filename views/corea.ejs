@@ -20,38 +20,21 @@
     <%- include('header.ejs') %>
     <div class="stripe-space"></div>
     <main class="corea">
-        <div class="table-header">
-            <div class="table-header-title">
-                <h1 class="table-title">COREA Dataset</h1>
-                <h1 class="table-title-information">The table below shows the COREA dataset for the selected omics type.</h1>
-        
-                <div class="dropdown">
-                    <select name="select_box" id="select_box" class="form-control">
-                        <option value='' selected>-- select --</option>
-                        <option value="RNA-seq(PBMC)">RNA-seq (PBMC)</option>
-                        <option value="Methyl-seq(Blood)">Methyl-seq (Blood)</option>
-                        <option value="GWAS">GWAS</option>
-                        <option value="proteomics(Plasma)">Proteomics (Plasma)</option>
-                        <option value="Metabolomics(plasma)">Metabolomics (Plasma)</option>
-                        <option value="Metagenomics(EBC)">Metagenomics (EBC)</option>
-        
-                    </select>
-                </div> 
-            </div>
-            <div class="table-information">
-                <!-- <div class="chart-extension" id="chart-extension"></div> -->
-                <div class="table-information-extension" id="table-information-extension">
-                    <img src="http://203.252.206.90:5566/images/file.png" alt="Breaking Borders Logo" height="40">  
-                    <div class="table-information-extension-sub" id="table-information-extension-sub">
+        <h1 class="table-title">COREA Dataset</h1>
+        <h1 class="table-title-information">The table below shows the COREA dataset for the selected omics type.</h1>
 
-                    </div>
-                </div>
-                <div class="table-information-filesize" id="table-information-filesize">
-                    <img src="http://203.252.206.90:5566/images/database.png" alt="Breaking Borders Logo" height="40">  
-                </div>
-            </div>
-        </div>
-        
+        <div class="dropdown">
+            <select name="select_box" id="select_box" class="form-control">
+                <option value='' selected>-- select --</option>
+                <option value="RNA-seq(PBMC)">RNA-seq (PBMC)</option>
+                <option value="Methyl-seq(Blood)">Methyl-seq (Blood)</option>
+                <option value="GWAS">GWAS</option>
+                <option value="proteomics(Plasma)">Proteomics (Plasma)</option>
+                <option value="Metabolomics(plasma)">Metabolomics (Plasma)</option>
+                <option value="Metagenomics(EBC)">Metagenomics (EBC)</option>
+
+            </select>
+        </div> 
 
         <!-- <div class="download_button">
             <form action="/menu/corea/ajaxDownloadSelectedData" method="POST">
@@ -65,10 +48,8 @@
                 <thead>
                     <tr>
                         <!-- <th class="table_checkbox"><input type='checkbox' name="selectall" value='selectall' onclick='selectAll(this)'/></th> -->
-                        <th class="table-fileName">File name</th>   
-                        <th class="table-datasize">Size</th>
+                        <th class="table-fileName">file name</th>   
                         <th class="table-downloadButton">Download</th>
-
                     </tr>
                 </thead>
                 <tbody id="corea-table-zip-tbody">
@@ -104,66 +85,7 @@
     <script type="text/javascript" src="/mdb/js/mdb.min.js"></script>
     <!-- MDBootstrap Datatables  -->
     <script type="text/javascript" src="/mdb/js/addons/datatables.min.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
     <script type="text/javascript">
-        /*
-        function createChart(div, data, value_name, category_name, label_name) {
-            var root = am5.Root.new(div);
-            alert(data)
-            // Set themes
-            root.setThemes([
-                am5themes_Animated.new(root)
-            ]);
-
-            // Create chart
-            var chart = root.container.children.push(
-                am5percent.PieChart.new(root, {
-                    endAngle: 270
-                })
-            );
-
-            // Create series
-            var series = chart.series.push(
-                am5percent.PieSeries.new(root, {
-                    valueField: value_name,
-                    categoryField: category_name,
-                    endAngle: 270
-                })
-            );
-            // series.ticks.template.setAll({ forceHidden: true });
-            var bgColor = root.interfaceColors.get("background");
-            series.slices.template.setAll({
-                stroke: bgColor,
-                strokeWidth: 1,
-                tooltipText: "{category}: {value} cases"
-                    // "{category}: {valuePercentTotal.formatNumber('0.00')}% ({value} COUNT(Biologics))"
-            });
-
-            // chart label (title)
-            chart.children.unshift(am5.Label.new(root, {
-                text: label_name,
-                fontSize: 15,
-                fontWeight: "500",
-                textAlign: "center",
-                x: am5.percent(50),
-                centerX: am5.percent(50),
-                paddingTop: 0,
-                paddingBottom: 10
-            }));
-
-            series.data.setAll(data);
-
-            series.states.create("hidden", {
-                endAngle: -90
-            });
-        }
-        */
-        
-        
-
         $(document).on("change", "#select_box", function(){
             var omicsName = $(this).val();
             $.ajax({
@@ -188,35 +110,12 @@
                     }
                     */
                     $("#corea-table-zip-tbody tr").remove();
-                    let zip = data.filelist.map(function (e, i) {
-                        return [e, data.fileSizelist[i]];
-                    });
-                    for (var value of zip) {
+                    for (var value of data) {
                         $("#corea-table-zip-tbody").append(
-                            '<tr><td class="table-fileName-td">'+value[0]+'</td>\
-                                <td class="table-datasize-td">'+value[1]+'</td>\
-                                <td class="table-downloadButton-td"><button type="button" id="zipDownloadbutton" class="table-downloadButton-td-sub"><img src="/images/download.png" alt="btnImages" width=20></button></td>\
-                                </tr>');
+                            '<tr><td>'+value+'</td><td>\
+                                <button type="button" id="zipDownloadbutton" class="zipDownloadbutton"><img src="/images/download.png" alt="btnImages" width=20></button>\
+                            </td></tr>');
                     }
-                    $("#table-information-extension-sub h2").remove();
-                    $("#table-information-filesize h2").remove();
-
-                    const itemDict_list = [];
-                    const itemDict = {};
-                    $("#table-information-filesize").append('<h2 class="information-filesize">'+data.fileSizeSum+' </h2>');
-                    for (var key in data.fileExtension){
-                        $("#table-information-extension-sub").append('<h2 class="information-extension">'+key+" : "+data.fileExtension[key]+' files</h2>');
-
-                        /*
-                        itemDict['category'] = key;
-                        itemDict['value'] = data.fileExtension[key];
-                        itemDict_list.push(itemDict);
-                        */
-                    };
-                    //alert(itemDict_list[0]['category'])
-                    //am5.ready(function() {createChart("chartdiv-extension", itemDict_list, "value", "category", "file extension")});
-                    //am5.ready(function() {createChart()});
-
                 }
             });
         });
@@ -254,8 +153,6 @@
                 checkbox.checked = selectAll.checked
             })
         }
-
-        
 /*
         // 개별 파일 다운로드
         $("#downloadSelectedData").on("click", function(){
